@@ -1,0 +1,34 @@
+---
+- name: Configure Backend Server
+  hosts: all
+  become: true
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install required packages for Java and Maven
+      apt:
+        name:
+          - openjdk-17-jdk
+          - maven
+          - git
+        state: present
+
+    - name: Verify Java installation
+      shell: java -version
+      register: java_version_output
+    - debug:
+        msg: "{{ java_version_output.stdout }}"
+
+    - name: Clone repository
+      git:
+        repo: 'https://github.com/astypczy/ZRCwAW.git'
+        dest: /opt/ZRCwAW
+
+    - name: Build backend application with Maven
+      command: mvn clean package -DskipTests
+      args:
+        chdir: /opt/ZRCwAW/ec2/backend
+#     command: java -jar /opt/ZRCwAW/ec2/backend/target/project-0.0.1-SNAPSHOT.jar

@@ -1,0 +1,94 @@
+$primary: #49738c;
+
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/../../../assets/images/background.png');
+    background-size: cover;
+    background-position: center;
+
+    .login-card {
+        background-color: #f9f9f9;
+        padding: 2rem;
+        border-radius: 10px;
+        width: 50rem;
+        border: 1px solid $primary;
+
+        .login-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+
+            label {
+                font-weight: bold;
+            }
+
+            input {
+                width: 100%;
+                padding: 0.8rem;
+                border: 1px solid $primary;
+                border-radius: 10px;
+                transition: border-color 0.3s;
+
+                &:focus {
+                    outline: none;
+                    border-color: #00b7ff;
+                }
+            }
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 1rem;
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s;
+
+            &:hover {
+                color: #00b7ff;
+            }
+        }
+    }
+
+  .error-message {
+    color: red;
+  }
+
+  .popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .close-btn {
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .close-btn:hover {
+    color: black;
+  }
+
+  .password-input-container {
+    position: relative;
+  }
+
+}

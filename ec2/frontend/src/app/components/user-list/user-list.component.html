@@ -1,0 +1,10 @@
+<div class="usersContainer">
+  <h2>Lista użytkowników</h2>
+  <div class="userList">
+    <div class="userCart" *ngFor="let user of users">
+      <div class="userInfo">
+        <p>Imię i nazwisko: {{ user.firstName }} {{ user.surname }}</p>
+      </div>
+    </div>
+  </div>
+</div>

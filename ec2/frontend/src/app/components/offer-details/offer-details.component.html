@@ -1,0 +1,61 @@
+<div class="main-container">
+    <div class="top-bar">
+        <h1 class="main-header">Tablica Ogłoszeń Drobnych</h1>
+        <button class="return-button" (click)="goBack()">Powrót</button>
+    </div>
+    <div class="offer-details-container">
+        <div class="chat-container">
+            <button class="chat-button" (click)="toggleChat()">
+                <i class="fa fa-envelope"></i>
+            </button>
+            <div class="chat-window" *ngIf="isChatOpen">
+                <h2>Chat</h2>
+                <div class="messages">
+                    <div *ngFor="let message of messages" class="message-item">
+                        <p><strong>{{ message.senderName }}:</strong> {{ message.message }} <span>{{
+                                message.timestamp |
+                                date:'short' }}</span></p>
+                        <div *ngIf="currentUser?.login === offer?.createdBy && message.senderId !== currentUser?.login"
+                            class="reply-section">
+                            <button
+                                (click)="replyMode[message.timestamp.toString()] = !replyMode[message.timestamp.toString()]"
+                                class="answer-button">Odpowiedz</button>
+                            <div *ngIf="replyMode[message.timestamp.toString()]" class="reply-input-section">
+                                <input type="text" [(ngModel)]="replyMessage[message.timestamp.toString()]"
+                                    placeholder="Napisz odpowiedź...">
+                                <button (click)="replyToMessage(message)" class="send-answer-button">Wyślij
+                                    odpowiedź</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="newMessage" placeholder="Napisz wiadomość...">
+                <button (click)="sendMessage()" class="send-button">Wyślij</button>
+            </div>
+        </div>
+        <div class="offer-details-content">
+            <h1 class="offer-details-header">Szczegóły oferty</h1>
+            <div class="offer-details">
+                <p><strong>Tytuł:</strong> {{ offer?.title }}</p>
+                <p><strong>Tagi:</strong> {{ offer?.tags }}</p>
+                <p><strong>Status:</strong> {{ offer?.noticeStatus }}</p>
+                <p><strong>Opis:</strong> {{ offer?.description }}</p>
+            </div>
+            <h1 class="offer-details-header">Dane kontaktowe</h1>
+            <div class="offer-details">
+                <p><strong>E-mail:</strong> {{ offer?.createdBy }}</p>
+                <p><strong>Numer telefonu:</strong> {{ offer?.sellerNumber }}</p>
+            </div>
+        </div>
+        <div class="images-container">
+            <div *ngIf="files.length > 0">
+                <h2>Zdjęcia: </h2>
+                <div class="image-gallery">
+                    <div *ngFor="let file of files">
+                        <img [src]="'data:' + file.fileType + ';base64,' + file.fileContent" alt="{{ file.fileName }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

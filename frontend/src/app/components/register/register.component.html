@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="register-card">
+                <h2 class="register-title">Rejestracja</h2>
+
+                <form (ngSubmit)="register()" #registerForm="ngForm">
+                    <div class="form-group">
+                        <label for="firstName">Imię:</label>
+                        <input type="firstName" class="form-control" id="firstName" name="firstName" required
+                            [(ngModel)]="firstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">Nazwisko:</label>
+                        <input type="surname" class="form-control" id="surname" name="surname" required
+                            [(ngModel)]="surname">
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email:</label>
+                      <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="email"
+                             ngModel [email] = "true" #emailInput="ngModel">
+                      <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="alert alert-danger">
+                        <div *ngIf="emailInput.errors?.['required']" class="error-message">Pole Email jest wymagane.</div>
+                        <div *ngIf="emailInput.errors?.['email']" class="error-message">Podaj poprawny adres email.</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Hasło:</label>
+                      <div class="password-input-container">
+                        <input #passwordField type="password" class="form-control" id="password" name="password" required
+                               [(ngModel)]="password" pattern="^(?=.*[a-ząęćłńóśźż])(?=.*[A-ZĄĘĆŁŃÓŚŹŻ])(?=.*[!@#$%^&*])[a-zA-ZąęćłńóśźżĄĘĆŁŃÓŚŹŻ\d!@#$%^&*]{8,}$" #passwordInput="ngModel">
+                      </div>
+                      <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="alert alert-danger">
+                          <div *ngIf="passwordInput.errors?.['required']" class="error-message">Pole Hasło jest wymagane.</div>
+                          <div *ngIf="registerErrorPassword" class="error-message">Hasło musi zawierać co najmniej jedną małą literę,
+                            jedną wielką literę, jedną cyfrę, jeden znak specjalny i mieć co najmniej 8 znaków.</div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="confirmPassword">Potwierdź hasło:</label>
+                      <div class="password-input-container">
+                        <input #passwordConfirmField type="password" class="form-control" id="confirmPassword" name="confirmPassword" required
+                               [(ngModel)]="confirmPassword" #passwordConfirmationInput="ngModel">
+                      </div>
+                      <div *ngIf="passwordConfirmationInput.invalid && (passwordConfirmationInput.dirty || passwordConfirmationInput.touched)" class="alert alert-danger">
+                        <div *ngIf="passwordConfirmationInput.errors?.['required']" class="error-message">Pole Potwierdź hasło jest wymagane.</div>
+                      </div>
+                      <div *ngIf="registerErrorConfirmedPassword" class="error-message">Podane hasła muszą być identyczne.</div>
+                    </div>
+                  <div class="form-group">
+                    <label class="checkbox-container">
+                      <input type="checkbox" id="isSeller" name="isSeller" [(ngModel)]="isSeller">
+                      <span class="checkmark"></span>
+                      Czy jesteś osobą sprzedającą?
+                    </label>
+                  </div>
+                  <div *ngIf="submitted && registerForm.invalid" class="error-message">
+                    Formularz zawiera niepoprawne dane. Proszę sprawdź i uzupełnij wymagane pola.
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block">Zarejestruj się</button>
+                  <button (click)="goToLoginScreen()" style="margin-top: 1rem;">Wróć do logowania</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

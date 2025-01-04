@@ -1,0 +1,53 @@
+<div class="modal">
+    <button class="close-button" (click)="closeModal()">X</button>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1>Edytuj ofertę</h1>
+        </div>
+        <div class="modal-body">
+            <form #offerForm="ngForm">
+                <div class="form-group">
+                    <label for="title">Tytuł</label>
+                    <input type="text" id="title" name="title" [(ngModel)]="title">
+                </div>
+                <div class="tag-checkbox">
+                    <label for="useExistingTags" class="checkbox-label">Skorzystaj z istniejących tagów</label>
+                    <input type="checkbox" id="useExistingTags" name="useExistingTags" [(ngModel)]="useExistingTags">
+                </div>
+                <div class="form-group" *ngIf="useExistingTags">
+                    <label for="tags">Tagi</label>
+                    <mat-form-field>
+                        <mat-select placeholder="Wybierz tag" [formControl]="tagCtrl" multiple>
+                            <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group" *ngIf="!useExistingTags">
+                    <label for="customTag">Własny tag</label>
+                    <input type="text" id="customTag" name="customTag" [(ngModel)]="ownTag"
+                        placeholder="Wprowadź tagi oddzielone przecinkiem">
+                </div>
+                <div class="form-group">
+                    <label for="noticeStatus">Status oferty</label>
+                    <select id="noticeStatus" name="noticeStatus" [(ngModel)]="noticeStatus">
+                        <option value="Draft">Wersja robocza</option>
+                        <option value="Live">Opublikowane</option>
+                        <option value="Archived">Archiwum</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sellerNumber">Numer telefonu</label>
+                    <input type="text" id="sellerNumber" name="sellerNumber" [(ngModel)]="sellerNumber">
+                </div>
+                <div class="form-group">
+                    <label for="description">Opis</label>
+                    <textarea id="description" name="description" [(ngModel)]="description"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button class="footer-button" type="submit" (click)="editOffer()">Zapisz</button>
+                    <button (click)="closeModal()">Anuluj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

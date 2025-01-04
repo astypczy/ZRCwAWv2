@@ -1,0 +1,79 @@
+.modal {
+    .close-button {
+        float: right;
+        margin: 2rem;
+        color: black;
+        background-color: #fff;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        padding: 3rem;
+        border-radius: 10px;
+        height: fit-content;
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h1 {
+                color: black;
+            }
+
+        }
+    }
+
+    .modal-body {
+        .form-group {
+            margin-bottom: 1rem;
+
+            label {
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+
+            mat-form-field {
+                width: 100%;
+                border-radius: 10px;
+            }
+
+            input,
+            select,
+            textarea {
+                width: 100%;
+                padding: 0.5rem;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+
+                &:focus {
+                    outline: none;
+                    border-color: #00b7ff;
+                }
+            }
+
+            textarea {
+                resize: vertical;
+                min-height: 5rem;
+            }
+
+        }
+
+        .tag-checkbox {
+            margin: 1rem 0;
+
+            .checkbox-label {
+                margin-right: 1rem;
+            }
+        }
+
+        .modal-footer {
+            float: right;
+
+            .footer-button {
+                margin: 1rem;
+            }
+        }
+    }
+
+}

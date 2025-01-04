@@ -1,0 +1,151 @@
+$primary: #49778c;
+
+.main-container {
+    padding: 0;
+
+    .top-bar {
+        width: auto;
+        background-color: $primary;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem;
+
+        .main-header {
+            margin-top: 0.5rem;
+        }
+
+        .return-button {
+            float: right;
+            border: 1px solid #f4f4f4;
+            margin-right: 2rem;
+        }
+    }
+
+    .offer-details-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: row;
+        gap: 2rem;
+        padding: 1rem;
+
+        .offer-details-header {
+            color: black;
+        }
+
+        .offer-details-content {
+            margin-right: 4rem;
+
+            .offer-details {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                p {
+                    font-size: large;
+                }
+            }
+        }
+
+        .images-container {
+            margin-right: 2rem;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            .chat-button {
+                position: fixed;
+                bottom: 3rem;
+                left: 3rem;
+                z-index: 9999;
+                border-radius: 50%;
+                padding: 1rem;
+                margin: 0 0 0.5rem 0.5rem;
+            }
+
+            .chat-window {
+                position: fixed;
+                bottom: 3rem;
+                left: 3rem;
+                z-index: 9998;
+                width: 30%;
+                height: 70%;
+                background-color: white;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                padding: 1rem;
+                margin: 2.5rem;
+
+                .send-button {
+                    font-size: small;
+                    padding: 0.5rem;
+                }
+
+                .messages {
+                    flex-grow: 1;
+                    overflow-y: auto;
+                    margin-bottom: 1rem;
+
+                    .message-item {
+                        margin-bottom: 0.4rem;
+
+                        p {
+                            margin: 0;
+                            font-size: small;
+                        }
+
+                        .reply-section {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 0.6rem;
+
+                            .answer-button,
+                            .send-answer-button {
+                                background-color: white;
+                                color: $primary;
+                                font-size: small;
+                                margin-left: 1rem;
+                            }
+
+                            .reply-input-section {
+                                display: flex;
+                                align-items: center;
+
+                                input[type="text"] {
+                                    padding: 0.5rem;
+                                    border: 1px solid #ccc;
+                                    border-radius: 10px;
+                                    outline: none;
+                                    font-size: small;
+                                    flex-grow: 1;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                input[type="text"] {
+                    padding: 0.5rem;
+                    border: 1px solid #ccc;
+                    border-radius: 10px;
+                    outline: none;
+                    font-size: small;
+                    margin-bottom: 0.5rem;
+                }
+            }
+        }
+
+    }
+}
