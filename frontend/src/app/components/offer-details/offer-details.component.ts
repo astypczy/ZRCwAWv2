@@ -8,6 +8,7 @@ import { AuthService } from '../../services/authService';
 import { User } from '../../models/user';
 import { OfferDetailsModule } from './offer-details.module';
 import { AppFile } from '../../models/file';
+import {Subscription, interval, switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-offer-details',
@@ -23,6 +24,7 @@ export class OfferDetailsComponent implements OnInit {
   currentUser: User | null = null;
   replyMessage: { [key: string]: string } = {};
   replyMode: { [key: string]: boolean } = {};
+  private messagePollingSubscription: Subscription | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -85,12 +87,28 @@ export class OfferDetailsComponent implements OnInit {
     this.authService.getCurrentUser().subscribe(
       (user: User) => {
         this.currentUser = user;
-        this.loadMessages(offerId);
+        // this.loadMessages(offerId);
+        this.startMessagePolling(offerId, user.login);
       },
       (error) => {
         console.error('Błąd podczas pobierania aktualnego użytkownika:', error);
       }
     );
+  }
+  startMessagePolling(offerId: number, userId: string): void {
+    // Cykliczne odpytywanie co 2 sekundy
+    this.messagePollingSubscription = interval(2000)
+      .pipe(
+        switchMap(() => this.chatService.getMessages(offerId, userId))
+      )
+      .subscribe({
+        next: (messages) => {
+          this.messages = messages;
+        },
+        error: (err) => {
+          console.error('Błąd podczas pobierania wiadomości:', err);
+        }
+      });
   }
 
   toggleChat(): void {
