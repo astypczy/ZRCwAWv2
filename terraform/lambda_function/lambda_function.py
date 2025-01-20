@@ -1,34 +1,33 @@
-import boto3
+import os
+import json
 import time
 import re
-import os
+import boto3
 
 # Inicjalizacja klienta SQS
 sqs = boto3.client('sqs')
 
-# Pobranie zmiennych środowiskowych (URL kolejek)
-SOURCE_QUEUE_URL = "https://sqs.us-east-1.amazonaws.com/637423541704/messages_queue"  # Kolejka wejściowa
-ADMIN_QUEUE_URL = "https://sqs.us-east-1.amazonaws.com/637423541704/admin_queue"    # Kolejka admina
+# Pobranie URL-i kolejek z zmiennych środowiskowych
+QUEUE_URL = "https://sqs.us-east-1.amazonaws.com/637423541704/message-queue"
+ADMIN_QUEUE_URL = "https://sqs.us-east-1.amazonaws.com/637423541704/admin-queue"
 
 def lambda_handler(event, context):
-    # Pobranie wiadomości z kolejki
     for record in event['Records']:
         message_body = record['body']
+        print(f"Received message: {message_body}")
 
-        # Opóźnienie 5 sekund
+        # Wprowadzenie 5-sekundowego opóźnienia
         time.sleep(5)
 
-        # Sprawdzenie, czy treść zawiera liczbę
+        # Sprawdzenie, czy wiadomość zawiera liczbę
         if re.search(r'\d', message_body):
-            # Wysłanie kopii wiadomości do kolejki admina
+            print(f"Message contains a number. Sending to admin queue.")
+            
+            # Przesłanie wiadomości do kolejki admina
             sqs.send_message(
                 QueueUrl=ADMIN_QUEUE_URL,
                 MessageBody=message_body
             )
-        print(f"Processed message: {message_body}")
-
-    return {
-        'statusCode': 200,
-        'body': 'Message processed successfully'
-    }
-
+        else:
+            print("Message does not contain a number. Processing complete.")
+    return {"statusCode": 200, "body": "Processing complete"}
