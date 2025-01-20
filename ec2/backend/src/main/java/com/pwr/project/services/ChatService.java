@@ -67,4 +67,17 @@ public class ChatService {
                 message.getSenderName()
         );
     }
+
+    // Metoda do konwersji wiadomości na JSON do wysyłki do kolejki SQS
+    public String createMessageBody(Long offerId, MessageDTO messageDTO) {
+        return String.format(
+                "{\"offerId\": %d, \"message\": \"%s\", \"senderId\": \"%s\", \"recipientId\": \"%s\", \"timestamp\": %d, \"senderName\": \"%s\"}",
+                offerId,
+                messageDTO.message(),
+                messageDTO.senderId(),
+                messageDTO.recipientId(),
+                messageDTO.timestamp(),
+                messageDTO.senderName()
+        );
+    }
 }

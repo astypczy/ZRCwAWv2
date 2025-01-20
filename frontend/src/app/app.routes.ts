@@ -5,13 +5,15 @@ import { MainScreenComponent } from './components/main-screen/main-screen.compon
 import { OfferDetailsComponent } from './components/offer-details/offer-details.component';
 import { RegisterComponent } from './components/register/register.component';
 import {UserListComponent} from "./components/user-list/user-list.component";
+import {AdminQueueComponent} from "./components/admin-queue/admin-queue.component";
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'main', component: MainScreenComponent },
     { path: 'offer-details/:id', component: OfferDetailsComponent },
-    { path: 'users', component: UserListComponent}
+    { path: 'users', component: UserListComponent},
+    { path: 'admin', component: AdminQueueComponent }
 ];
 
 @NgModule({

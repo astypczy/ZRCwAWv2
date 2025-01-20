@@ -49,7 +49,6 @@ public class AuthService implements UserDetailsService {
         return userRepository.findByLogin(login)
             .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
-    //toDo : ustawienie stałego hasła
     public void register(RegisterDTO registerDTO) throws InvalidJWTException {
         if (userRepository.findByLogin(registerDTO.login()).isPresent()) {
             throw new InvalidJWTException("Username already exists");

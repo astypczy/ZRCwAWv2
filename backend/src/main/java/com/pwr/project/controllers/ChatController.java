@@ -22,7 +22,7 @@ public class ChatController {
     @Autowired
     private SqsClient sqsClient;
 
-    private final String queueUrl = "https://sqs.us-east-1.amazonaws.com/637423541704/messages-queue";
+    private final String queueUrl = "https://sqs.us-east-1.amazonaws.com/637423541704/message-queue";
 
     @GetMapping("/messages/{offerId}")
     public ResponseEntity<List<MessageDTO>> getMessages(@PathVariable Long offerId, @RequestParam String userId) {
